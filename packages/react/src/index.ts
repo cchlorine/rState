@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react"
-import { StateManager } from "./rstate"
+import { StateManager } from "@rstate/core"
 
 export function useRemoteState<T>(key: string, initialValue: T) {
-  const stateManager = StateManager.getInstance()
   const [isValidating, setIsValidating] = useState(true)
   const [state, setState] = useState<T>(initialValue)
+  const stateManager = StateManager.getInstance()
 
   useEffect(() => {
     if (typeof window === 'undefined')  return

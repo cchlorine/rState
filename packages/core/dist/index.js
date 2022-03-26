@@ -20,12 +20,6 @@ var RemoteStateServer = /** @class */ (function () {
             writable: true,
             value: void 0
         });
-        Object.defineProperty(this, "callbackMap", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: {}
-        });
         this.connection = io(this.serverUrl);
     }
     Object.defineProperty(RemoteStateServer.prototype, "bind", {
@@ -73,6 +67,14 @@ var RemoteStateServer = /** @class */ (function () {
             return (RemoteStateServer.instances[serverName] = new RemoteStateServer(serverName, serverUrl));
         }
     });
+    Object.defineProperty(RemoteStateServer, "initServer", {
+        enumerable: false,
+        configurable: true,
+        writable: true,
+        value: function (server) {
+            return RemoteStateServer.getInstance(server);
+        }
+    });
     Object.defineProperty(RemoteStateServer, "instances", {
         enumerable: true,
         configurable: true,
@@ -82,8 +84,8 @@ var RemoteStateServer = /** @class */ (function () {
     return RemoteStateServer;
 }());
 export { RemoteStateServer };
-var RemoteNamespaceStateManager = /** @class */ (function () {
-    function RemoteNamespaceStateManager(serverName, namespace) {
+var StateManager = /** @class */ (function () {
+    function StateManager(serverName, namespace) {
         Object.defineProperty(this, "serverName", {
             enumerable: true,
             configurable: true,
@@ -104,7 +106,7 @@ var RemoteNamespaceStateManager = /** @class */ (function () {
         });
         this.server = RemoteStateServer.getInstance(serverName);
     }
-    Object.defineProperty(RemoteNamespaceStateManager.prototype, "bind", {
+    Object.defineProperty(StateManager.prototype, "bind", {
         enumerable: false,
         configurable: true,
         writable: true,
@@ -112,7 +114,7 @@ var RemoteNamespaceStateManager = /** @class */ (function () {
             this.server.bind(this.namespace, key, initialValue, updater);
         }
     });
-    Object.defineProperty(RemoteNamespaceStateManager.prototype, "set", {
+    Object.defineProperty(StateManager.prototype, "set", {
         enumerable: false,
         configurable: true,
         writable: true,
@@ -120,32 +122,41 @@ var RemoteNamespaceStateManager = /** @class */ (function () {
             this.server.set(this.namespace, key, value);
         }
     });
-    Object.defineProperty(RemoteNamespaceStateManager, "getInstance", {
+    Object.defineProperty(StateManager, "getInstance", {
         enumerable: false,
         configurable: true,
         writable: true,
         value: function (namespace, serverName) {
             if (serverName === void 0) { serverName = 'default'; }
-            namespace = namespace || RemoteNamespaceStateManager.defaultNamespace;
+            namespace = namespace || StateManager.defaultNamespace;
             var instanceName = [serverName, namespace].join('$$');
-            if (RemoteNamespaceStateManager.instances[instanceName]) {
-                return RemoteNamespaceStateManager.instances[instanceName];
+            if (StateManager.instances[instanceName]) {
+                return StateManager.instances[instanceName];
             }
-            return (RemoteNamespaceStateManager.instances[instanceName] = new RemoteNamespaceStateManager(serverName, namespace));
+            return (StateManager.instances[instanceName] = new StateManager(serverName, namespace));
         }
     });
-    Object.defineProperty(RemoteNamespaceStateManager, "defaultNamespace", {
+    Object.defineProperty(StateManager, "init", {
+        enumerable: false,
+        configurable: true,
+        writable: true,
+        value: function (namespace, server) {
+            server && RemoteStateServer.initServer(server);
+            return this.getInstance(namespace);
+        }
+    });
+    Object.defineProperty(StateManager, "defaultNamespace", {
         enumerable: true,
         configurable: true,
         writable: true,
         value: ['default', window.location.host].join('$$')
     });
-    Object.defineProperty(RemoteNamespaceStateManager, "instances", {
+    Object.defineProperty(StateManager, "instances", {
         enumerable: true,
         configurable: true,
         writable: true,
         value: {}
     });
-    return RemoteNamespaceStateManager;
+    return StateManager;
 }());
-export { RemoteNamespaceStateManager };
+export { StateManager };

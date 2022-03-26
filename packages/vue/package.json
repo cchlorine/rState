@@ -1,0 +1,20 @@
+{
+  "name": "@rstate/vue",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Clancey Lin<gc@par.ink>",
+  "license": "MIT",
+  "dependencies": {
+    "@rstate/core": "workspace:^1.0.0"
+  },
+  "devDependencies": {
+    "vue": "^3.2.31"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.31"
+  }
+}

@@ -15,9 +15,9 @@ var __read = (this && this.__read) || function (o, n) {
     return ar;
 };
 import { useCallback, useEffect, useState } from "react";
-import { RemoteNamespaceStateManager } from "./rstate";
+import { StateManager } from "@rstate/core";
 export function useRemoteState(key, initialValue) {
-    var stateManager = RemoteNamespaceStateManager.getInstance();
+    var stateManager = StateManager.getInstance();
     var _a = __read(useState(true), 2), isValidating = _a[0], setIsValidating = _a[1];
     var _b = __read(useState(initialValue), 2), state = _b[0], setState = _b[1];
     useEffect(function () {
@@ -29,6 +29,8 @@ export function useRemoteState(key, initialValue) {
         }, initialValue);
     }, []);
     var saveState = useCallback(function (value) {
+        if (isValidating)
+            return;
         if (stateManager) {
             stateManager.set(key, value);
             setIsValidating(true);

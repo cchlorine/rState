@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useRemoteState } from '@rstate/hook';
+import { useRemoteState } from '@rstate/react';
 
 import './App.css';
 function App() {

@@ -11,24 +11,23 @@ export declare class RemoteStateServer {
         [key: string]: RemoteStateServer;
     };
     connection: IOSocket;
-    callbackMap: {
-        [key: string]: (newState: any) => void;
-    };
     constructor(serverName: string, serverUrl: string);
     bind<T>(namespace: string, key: string, initialValue: T, updater: (newState: T) => void): () => void;
     set<T>(namespace: string, key: string, value: T): void;
     static getInstance(server?: string | ServerConfig): RemoteStateServer;
+    static initServer(server: ServerConfig): RemoteStateServer;
 }
-export declare class RemoteNamespaceStateManager {
+export declare class StateManager {
     serverName: string;
     namespace: string;
     static defaultNamespace: string;
     static instances: {
-        [key: string]: RemoteNamespaceStateManager;
+        [key: string]: StateManager;
     };
     protected server: RemoteStateServer;
     constructor(serverName: string, namespace: string);
     bind<T>(key: string, updater: (newState: T) => void, initialValue: T): void;
     set<T>(key: string, value: T): void;
-    static getInstance(namespace?: string, serverName?: string): RemoteNamespaceStateManager;
+    static getInstance(namespace?: string, serverName?: string): StateManager;
+    static init(namespace: string, server?: ServerConfig): StateManager;
 }
