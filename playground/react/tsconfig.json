@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.package-settings",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": true,
+    "module": "esnext",
+    "moduleResolution": "node"
+  },
+  "include": ["vite.config.ts"]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@rstate/hook",
+  "version": "1.0.0",
+  "main": "dist/useRemoteState.js",
+  "typings": "dist/useRemoteState.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Clancey Lin<gc@par.ink>",
+  "license": "MIT",
+  "dependencies": {
+    "superjson": "^1.8.1",
+    "socket.io-client": "^4.4.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.2"
+  }
+}

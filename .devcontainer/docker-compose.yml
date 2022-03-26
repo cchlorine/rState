@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VARIANT: 16-bullseye
+    volumes:
+      - ..:/workspaces:cached
+    command: sleep infinity
+    networks:
+      - backend
+    depends_on:
+      - redis
+    environment:
+      REDIS_HOST: redis
+
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    networks:
+      - backend
+    volumes:
+      - redis-data:/data
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  redis-data:
+    driver: local
