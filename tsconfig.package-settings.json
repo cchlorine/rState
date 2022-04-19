@@ -21,6 +21,11 @@
     "isolatedModules": true,
     "preserveValueImports": true,
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "@shared/*": [
+        "./packages/shared/*"
+      ]
+    }
   }
 }

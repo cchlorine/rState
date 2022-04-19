@@ -1,4 +1,4 @@
-import { StateManager } from "@rstate/core";
+import { StateManager } from "@rstate/client";
 import { customRef, reactive, ref, watch } from 'vue';
 export function useRemoteState(key, initialValue) {
     var rawValue = ref();

@@ -1,0 +1,18 @@
+{
+  "name": "@rstate/shared",
+  "version": "1.0.0",
+  "description": "internal utils shared",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "typings": "dist/esm/index.d.ts",
+  "scripts": {
+    "build:cjs": "tsc -p tsconfig-cjs.json",
+    "build:esm": "tsc",
+    "build": "concurrently 'npm:build:*'",
+    "watch:esm": "tsc -w",
+    "watch:cjs": "tsc -w -p tsconfig-cjs.json",
+    "watch": "concurrently 'npm:watch:*'"
+  },
+  "author": "Clancey Lin<gc@par.ink>",
+  "license": "MIT"
+}

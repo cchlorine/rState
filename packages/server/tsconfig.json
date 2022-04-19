@@ -4,9 +4,14 @@
     "src/**/*.ts"
   ],
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2021",
+    "lib": [
+      "es2021"
+    ],
+    "module": "commonjs",
     "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
     "downlevelIteration": true,
+    "preserveValueImports": false,
   }
 }

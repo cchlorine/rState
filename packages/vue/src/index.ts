@@ -1,5 +1,5 @@
-import { StateManager } from "@rstate/core"
-import{ customRef, reactive, ref, watch } from 'vue'
+import { StateManager } from "@rstate/client"
+import { customRef, reactive, ref, watch } from 'vue'
 
 export function useRemoteState<T>(key: string, initialValue: T) {
   const rawValue = ref<T>()

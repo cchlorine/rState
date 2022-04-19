@@ -4,7 +4,7 @@
 import { useRemoteState } from "@rstate/vue";
 import { ref } from "vue";
 const todoVal = ref('')
-const [todos, validating] = useRemoteState<string[]>("todo", []);
+const [todos, validating] = useRemoteState<string[]>("todo", [],);
 
 const handleSubmit = (e) => {
   e.preventDefault()

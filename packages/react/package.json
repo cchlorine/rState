@@ -10,7 +10,7 @@
   "author": "Clancey Lin<gc@par.ink>",
   "license": "MIT",
   "dependencies": {
-    "@rstate/core": "workspace:^1.0.0"
+    "@rstate/client": "workspace:^1.0.0"
   },
   "devDependencies": {
     "react": "^16.8.2"
